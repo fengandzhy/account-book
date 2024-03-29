@@ -8,8 +8,7 @@ router.get('/account', function(req, res, next) {
 });
 
 router.get('/account/create', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  res.send('添加记录');
+  res.render('create', { title: 'Express' });
 });
 
 module.exports = router;
