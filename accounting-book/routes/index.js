@@ -12,12 +12,13 @@ const shortid = require('shortid');
 
 /* accounting book list page. */
 router.get('/account', function(req, res, next) {
-  res.render('list', { title: 'Express' });
+  const accounts = db.get('accounts').value();
+  res.render('list', { accounts: accounts });
 
 });
 
 router.get('/account/create', function(req, res, next) {
-  res.render('create', { title: 'Express' });
+  res.render('create');
 });
 
 router.post('/account', (req, res) => {
