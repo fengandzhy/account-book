@@ -29,14 +29,13 @@
             <hr />
             <div class="accounts">
                 <% accounts.forEach(item =>{
-                    if (item.type == 1){
                 %>
-                    <div class="panel panel-success">
+                    <div class="panel <%=item.type == '-1'? 'panel-danger': 'panel-success'%>">
                         <div class="panel-heading"><%=item.time%></div>
                         <div class="panel-body">
                             <div class="col-xs-6"><%=item.title%></div>
                             <div class="col-xs-2 text-center">
-                                <span class="label label-success">收入</span>
+                                <span class="label <%=item.type == '-1'? 'label-warning': 'label-success'%>"><%=item.type == '-1'?'支出':'收入'%></span>
                             </div>
                             <div class="col-xs-2 text-right"><%=item.account%></div>
                             <div class="col-xs-2 text-right">
@@ -47,26 +46,7 @@
                             </div>
                         </div>
                     </div>
-                <%
-                    } else {
-                %>
-                <div class="panel panel-danger">
-                    <div class="panel-heading"><%=item.time%></div>
-                    <div class="panel-body">
-                        <div class="col-xs-6"><%=item.title%></div>
-                        <div class="col-xs-2 text-center">
-                            <span class="label label-warning">支出</span>
-                        </div>
-                        <div class="col-xs-2 text-right"><%=item.account%></div>
-                        <div class="col-xs-2 text-right">
-                  <span
-                          class="glyphicon glyphicon-remove"
-                          aria-hidden="true"
-                  ></span>
-                        </div>
-                    </div>
-                </div>
-                <%}})%>
+                <%})%>
 
             </div>
         </div>
