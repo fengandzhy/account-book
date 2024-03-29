@@ -1,6 +1,22 @@
 {
   "accounts": [
     {
+      "id": "FaUfaP0nr",
+      "title": "发工资",
+      "time": "2024-03-30",
+      "type": "1",
+      "account": "10000",
+      "remarks": "俄文"
+    },
+    {
+      "id": "8eS63GQj4",
+      "title": "发工资",
+      "time": "2024-03-30",
+      "type": "1",
+      "account": "10000",
+      "remarks": "卫戍"
+    },
+    {
       "id": "TpyGe2h1G",
       "title": "打工收入",
       "time": "2024-03-06",
