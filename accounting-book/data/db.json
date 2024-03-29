@@ -1,6 +1,14 @@
 {
   "accounts": [
     {
+      "id": "TpyGe2h1G",
+      "title": "打工收入",
+      "time": "2024-03-06",
+      "type": "1",
+      "account": "120",
+      "remarks": "阿斯蒂芬"
+    },
+    {
       "id": "oGuQSII3m",
       "title": "阿萨德",
       "time": "2024-03-06",

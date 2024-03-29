@@ -22,8 +22,8 @@ router.get('/account/create', function(req, res, next) {
 
 router.post('/account', (req, res) => {
   const id = shortid.generate();
-  db.get('accounts').push({id:id,...req.body}).write();
-  res.send('添加记录.');
+  db.get('accounts').unshift({id:id,...req.body}).write();
+  res.render('success');
 });
 
 module.exports = router;
