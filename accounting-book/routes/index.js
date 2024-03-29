@@ -27,4 +27,10 @@ router.post('/account', (req, res) => {
   res.render('success',{ msg: '添加成功', url: '/account' });
 });
 
+router.get('/account/:id', (req, res) => {
+  const id = req.params.id;
+  db.get('accounts').remove({id:id}).write();
+  res.render('success',{ msg: '删除成功', url: '/account' });
+});
+
 module.exports = router;
