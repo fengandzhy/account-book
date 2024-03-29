@@ -12,18 +12,25 @@ const shortid = require('shortid');
 
 /* accounting book list page. */
 router.get('/account', function(req, res, next) {
-  res.render('list', { title: 'Express' });
+  const accounts = db.get('accounts').value();
+  res.render('list', { accounts: accounts });
 
 });
 
 router.get('/account/create', function(req, res, next) {
-  res.render('create', { title: 'Express' });
+  res.render('create');
 });
 
 router.post('/account', (req, res) => {
   const id = shortid.generate();
   db.get('accounts').unshift({id:id,...req.body}).write();
   res.render('success',{ msg: '添加成功', url: '/account' });
+});
+
+router.get('/account/:id', (req, res) => {
+  const id = req.params.id;
+  db.get('accounts').remove({id:id}).write();
+  res.render('success',{ msg: '删除成功', url: '/account' });
 });
 
 module.exports = router;
