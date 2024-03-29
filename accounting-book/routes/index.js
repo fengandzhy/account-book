@@ -11,4 +11,9 @@ router.get('/account/create', function(req, res, next) {
   res.render('create', { title: 'Express' });
 });
 
+router.post('/account', (req, res) => {
+  // res.render('create', { title: 'Express' });
+  res.send('添加记录.');
+});
+
 module.exports = router;
