@@ -16,7 +16,7 @@ let AccountSchema = new mongoose.Schema({
         default: -1
     },
     //金额
-    account: {
+    amount: {
         type: Number,
         required: true
     },
