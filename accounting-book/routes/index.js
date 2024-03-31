@@ -11,10 +11,18 @@ const accountModel = require('../models/accountModel');
 
 
 /* accounting book list page. */
-router.get('/account', function(req, res, next) {
-  const accounts = db.get('accounts').value();
-  res.render('list', { accounts: accounts });
+router.get('/account', async function(req, res, next) {
+  // const accounts = db.get('accounts').value();
+  // res.render('list', { accounts: accounts });
 
+  try {
+    const accounts = await accountModel.find().sort({time: -1});
+    res.render('list', { accounts: accounts,moment: moment });
+  } catch (err) {
+    // 判断是否有错误
+    res.status(500).send('查询失败!');
+    return;
+  }
 });
 
 router.get('/account/create', function(req, res, next) {
@@ -32,7 +40,8 @@ router.post('/account', async (req, res) => {
   res.render('success', {msg: '添加成功', url: '/account'});
   } catch (err) {
     // 判断是否有错误
-    console.log(err);
+    res.status(500).send('插入失败!');
+    return;
   }
 });
 
