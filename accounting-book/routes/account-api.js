@@ -87,4 +87,23 @@ router.get('/account/:id', async (req, res) => {
         });
     }
 });
+
+router.patch('/account/:id', async (req, res) => {
+    try {
+        const {id} = req.params;
+        const account = await accountModel.updateOne({_id: id}, req.body);
+        res.json({
+            code:'0000',
+            msg:'更新成功',
+            data: account
+        });
+    } catch (err) {
+        console.log(err);
+        res.json({
+            code:'1005',
+            msg:'更新失败',
+            data: null
+        });
+    }
+});
 module.exports = router;
