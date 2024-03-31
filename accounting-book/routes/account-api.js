@@ -22,15 +22,13 @@ router.get('/account', async function(req, res, next) {
         });
     } catch (err) {
         // 判断是否有错误
-        res.status(500).send('查询失败!');
-        return;
+        res.json({
+            code:'0001',
+            msg:'读取失败',
+            data: null
+        });
     }
 });
-
-router.get('/account/create', function(req, res, next) {
-    res.render('create');
-});
-
 
 router.post('/account', async (req, res) => {
     try {
@@ -39,11 +37,18 @@ router.post('/account', async (req, res) => {
             //修改 time 属性的值
             time: moment(req.body.time).toDate()
         });
-        res.render('success', {msg: '添加成功', url: '/account'});
+        res.json({
+            code:'0000',
+            msg:'创建成功',
+            data: newAccount
+        });
     } catch (err) {
         // 判断是否有错误
-        res.status(500).send('插入失败!');
-        return;
+        res.json({
+            code:'0001',
+            msg:'创建失败',
+            data: null
+        });
     }
 });
 
