@@ -45,23 +45,28 @@ router.post('/account', async (req, res) => {
     } catch (err) {
         // 判断是否有错误
         res.json({
-            code:'0001',
+            code:'1002',
             msg:'创建失败',
             data: null
         });
     }
 });
 
-router.get('/account/:id', async (req, res) => {
+router.delete('/account/:id', async (req, res) => {
     try {
         const id = req.params.id;
         await accountModel.deleteOne({_id: id});
-        res.render('success',{ msg: '删除成功', url: '/account' });
+        res.json({
+            code:'0000',
+            msg:'删除成功',
+            data: null
+        });
     } catch (err) {
-
-        console.log(err);
-        res.status(500).send('删除失败!');
-        return;
+        res.json({
+            code:'1003',
+            msg:'删除失败',
+            data: null
+        });
     }
 });
 module.exports = router;
