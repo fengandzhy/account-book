@@ -69,4 +69,22 @@ router.delete('/account/:id', async (req, res) => {
         });
     }
 });
+
+router.get('/account/:id', async (req, res) => {
+    try {
+        const {id} = req.params;
+        const account = await accountModel.findById(id);
+        res.json({
+            code:'0000',
+            msg:'查询成功',
+            data: account
+        });
+    } catch (err) {
+        res.json({
+            code:'1004',
+            msg:'查询失败',
+            data: null
+        });
+    }
+});
 module.exports = router;
