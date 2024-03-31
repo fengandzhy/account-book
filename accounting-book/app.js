@@ -7,6 +7,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const accountRouter = require('./routes/account-api');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/api', accountRouter); // 在访问account 时，必须要在前面加上api
+app.use('/', authRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
