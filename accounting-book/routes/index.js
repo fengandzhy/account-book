@@ -12,9 +12,6 @@ const accountModel = require('../models/accountModel');
 
 /* accounting book list page. */
 router.get('/account', async function(req, res, next) {
-  // const accounts = db.get('accounts').value();
-  // res.render('list', { accounts: accounts });
-
   try {
     const accounts = await accountModel.find().sort({time: -1});
     res.render('list', { accounts: accounts,moment: moment });
@@ -45,10 +42,17 @@ router.post('/account', async (req, res) => {
   }
 });
 
-router.get('/account/:id', (req, res) => {
-  const id = req.params.id;
-  db.get('accounts').remove({id:id}).write();
-  res.render('success',{ msg: '删除成功', url: '/account' });
+router.get('/account/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    await accountModel.deleteOne({_id: id});
+    res.render('success',{ msg: '删除成功', url: '/account' });
+  } catch (err) {
+
+    console.log(err);
+    res.status(500).send('删除失败!');
+    return;
+  }
 });
 
 module.exports = router;
