@@ -18,11 +18,11 @@
         <form method="post" action="<%=url%>">
           <div class="form-group">
             <label for="item">用户名</label>
-            <input name="username" type="text" class="form-control" id="item" />
+            <input name="username" type="text" class="form-control" id="username" />
           </div>
           <div class="form-group">
             <label for="time">密码</label>
-            <input name="password" type="password" class="form-control" id="time" />
+            <input name="password" type="password" class="form-control" id="password" />
           </div>
           <hr>
           <button type="submit" class="btn btn-primary btn-block"><%=msg%></button>
@@ -31,5 +31,18 @@
     </div>
   </div>
 </body>
+<script>
+  //获取所有的 delBtn
+  const username = document.getElementById('username');
+  const password = document.getElementById('password');
 
+  let btn = document.querySelectorAll('.btn');
+  //绑定事件
+  btn.forEach(item => {
+    if(username == '' || password == ''){
+        alert('please input the username and password.');
+        return;
+    }
+  })
+</script>
 </html>

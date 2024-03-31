@@ -3,6 +3,8 @@ var router = express.Router();
 //导入 用户的模型
 const userModel = require('../models/userModel');
 const md5 = require('md5');
+const accountModel = require("../models/accountModel");
+const moment = require("moment/moment");
 //注册
 router.get('/reg', (req, res) => {
     //响应 HTML 内容
@@ -12,14 +14,17 @@ router.get('/reg', (req, res) => {
 //注册用户
 router.post('/reg', async (req, res) => {
     //做表单验证
-    //获取请求体的数据
-    await userModel.create({...req.body, password: md5(req.body.password)}, (err, data) => {
-        if(err){
-            res.status(500).send('注册失败, 请稍后再试~~');
-            return
-        }
-        res.render('success', {msg: '注册成功', url: '/login'});
-    })
+    try {
+        const newUser = await userModel.create({
+            ...req.body,
+            //修改 time 属性的值
+            password: md5(req.body.password)
+        });
+        res.render('success', {msg: '添加成功', url: '/account'});
+    } catch (err) {
+        // 判断是否有错误
+        res.status(500).send('添加失败!');
+    }
 
 });
 
