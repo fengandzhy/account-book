@@ -6,9 +6,9 @@ const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync(__dirname + '/../data/db.json');
 const db = low(adapter);
+const moment = require('moment');
+const accountModel = require('../models/accountModel');
 
-//导入 shortid
-const shortid = require('shortid');
 
 /* accounting book list page. */
 router.get('/account', function(req, res, next) {
@@ -21,10 +21,19 @@ router.get('/account/create', function(req, res, next) {
   res.render('create');
 });
 
-router.post('/account', (req, res) => {
-  const id = shortid.generate();
-  db.get('accounts').unshift({id:id,...req.body}).write();
-  res.render('success',{ msg: '添加成功', url: '/account' });
+// 插入数据
+router.post('/account', async (req, res) => {
+  try {
+  const newAccount = await accountModel.create({
+    ...req.body,
+    //修改 time 属性的值
+    time: moment(req.body.time).toDate()
+  });
+  res.render('success', {msg: '添加成功', url: '/account'});
+  } catch (err) {
+    // 判断是否有错误
+    console.log(err);
+  }
 });
 
 router.get('/account/:id', (req, res) => {
