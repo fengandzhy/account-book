@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
         req.session.username = user.username;
         req.session._id = user._id;
         //登录成功响应
-        res.render('success', {msg: '添加成功', url: '/account'});
+        res.render('success', {msg: '登录成功', url: '/account'});
     } catch (err) {
         console.log(err);
         // 判断是否有错误
